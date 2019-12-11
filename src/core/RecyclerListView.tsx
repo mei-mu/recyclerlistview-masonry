@@ -126,6 +126,7 @@ export interface RecyclerListViewProps {
   //For all props that need to be proxied to inner/external scrollview. Put them in an object and they'll be spread
   //and passed down. For better typescript support.
   scrollViewProps?: object;
+  marginOffset?: number;
 }
 export interface RecyclerListViewState {
   renderStack: RenderStack;
@@ -142,7 +143,8 @@ export default class RecyclerListView extends React.Component<
     initialRenderIndex: 0,
     isHorizontal: false,
     onEndReachedThreshold: 0,
-    renderAheadOffset: IS_WEB ? 1000 : 250
+    renderAheadOffset: IS_WEB ? 1000 : 250,
+    marginOffset: 0
   };
 
   public static propTypes = {};
@@ -192,7 +194,7 @@ export default class RecyclerListView extends React.Component<
 
     this._dataProvider = new DataProvider(this.props.rowHasChanged);
 
-    this._layoutProvider = LayoutUtil.getLayoutProvider(this.props.data);
+    this._layoutProvider = LayoutUtil.getLayoutProvider(this.props.data, this.props.marginOffset);
 
     this.state = {
       renderStack: {}
@@ -214,7 +216,7 @@ export default class RecyclerListView extends React.Component<
       this._dataProvider = new DataProvider(newProps.rowHasChanged);
     else this._dataProvider = this._dataProvider.cloneWithRows(newProps.data);
 
-    this._layoutProvider = LayoutUtil.getLayoutProvider(newProps.data);
+    this._layoutProvider = LayoutUtil.getLayoutProvider(newProps.data, this.props.marginOffset);
   }
 
   public componentDidUpdate(): void {
@@ -369,7 +371,7 @@ export default class RecyclerListView extends React.Component<
       this._virtualRenderer.setLayoutManager(
         new MasonaryLayoutManager(
           2,
-          LayoutUtil.getLayoutProvider(newProps.data),
+          LayoutUtil.getLayoutProvider(newProps.data, this.props.marginOffset),
           this._layout,
           newProps.isHorizontal
         )

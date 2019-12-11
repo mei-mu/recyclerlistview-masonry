@@ -101,7 +101,7 @@ var RecyclerListView = /** @class */ (function (_super) {
             _this._pendingScrollToOffset = offset;
         }, !props.disableRecycling);
         _this._dataProvider = new DataProvider_1.default(_this.props.rowHasChanged);
-        _this._layoutProvider = LayoutUtil_1.LayoutUtil.getLayoutProvider(_this.props.data);
+        _this._layoutProvider = LayoutUtil_1.LayoutUtil.getLayoutProvider(_this.props.data, _this.props.marginOffset);
         _this.state = {
             renderStack: {}
         };
@@ -120,7 +120,7 @@ var RecyclerListView = /** @class */ (function (_super) {
             this._dataProvider = new DataProvider_1.default(newProps.rowHasChanged);
         else
             this._dataProvider = this._dataProvider.cloneWithRows(newProps.data);
-        this._layoutProvider = LayoutUtil_1.LayoutUtil.getLayoutProvider(newProps.data);
+        this._layoutProvider = LayoutUtil_1.LayoutUtil.getLayoutProvider(newProps.data, this.props.marginOffset);
     };
     RecyclerListView.prototype.componentDidUpdate = function () {
         // if (this._pendingScrollToOffset) {
@@ -233,7 +233,7 @@ var RecyclerListView = /** @class */ (function (_super) {
             this.props.data !== newProps.data ||
             this.props.isHorizontal !== newProps.isHorizontal) {
             //TODO:Talha use old layout manager
-            this._virtualRenderer.setLayoutManager(new MasonaryLayoutManager_1.default(2, LayoutUtil_1.LayoutUtil.getLayoutProvider(newProps.data), this._layout, newProps.isHorizontal));
+            this._virtualRenderer.setLayoutManager(new MasonaryLayoutManager_1.default(2, LayoutUtil_1.LayoutUtil.getLayoutProvider(newProps.data, this.props.marginOffset), this._layout, newProps.isHorizontal));
             this._virtualRenderer.refreshWithAnchor();
             this._refreshViewability();
         }
@@ -422,7 +422,8 @@ var RecyclerListView = /** @class */ (function (_super) {
         initialRenderIndex: 0,
         isHorizontal: false,
         onEndReachedThreshold: 0,
-        renderAheadOffset: IS_WEB ? 1000 : 250
+        renderAheadOffset: IS_WEB ? 1000 : 250,
+        marginOffset: 0
     };
     RecyclerListView.propTypes = {};
     return RecyclerListView;

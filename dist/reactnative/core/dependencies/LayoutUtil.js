@@ -5,11 +5,11 @@ var LayoutProvider_1 = require("./LayoutProvider");
 var LayoutUtil = /** @class */ (function () {
     function LayoutUtil() {
     }
-    LayoutUtil.getWindowWidth = function () {
+    LayoutUtil.getWindowWidth = function (offset) {
         // To deal with precision issues on android
-        return Math.round(react_native_1.Dimensions.get("window").width * 1000) / 1000 - 6; //Adjustment for margin given to RLV;
+        return Math.round(react_native_1.Dimensions.get("window").width * 1000) / 1000 - (offset || 0); //Adjustment for margin given to RLV;
     };
-    LayoutUtil.getLayoutProvider = function (data) {
+    LayoutUtil.getLayoutProvider = function (data, offset) {
         return new LayoutProvider_1.default(function (index) {
             return data[index] != null && data[index].viewType != null
                 ? data[index].viewType
@@ -20,12 +20,12 @@ var LayoutUtil = /** @class */ (function () {
             var columnHeight = 0;
             switch (type) {
                 case LayoutProvider_1.LayoutType.SPAN:
-                    columnWidth = LayoutUtil.getWindowWidth();
+                    columnWidth = LayoutUtil.getWindowWidth(offset);
                     columnHeight =
                         (columnWidth * dataElement.height) / dataElement.width;
                     break;
                 case LayoutProvider_1.LayoutType.SINGLE:
-                    columnWidth = LayoutUtil.getWindowWidth() / 2;
+                    columnWidth = LayoutUtil.getWindowWidth(offset) / 2;
                     columnHeight =
                         (columnWidth * dataElement.height) / dataElement.width;
                 default:
