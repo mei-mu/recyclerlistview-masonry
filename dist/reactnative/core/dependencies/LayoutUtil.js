@@ -16,6 +16,8 @@ var LayoutUtil = /** @class */ (function () {
                 : LayoutProvider_1.LayoutType.SINGLE; //Since we have just one view type
         }, function (type, dim, index) {
             var dataElement = data[index];
+            if (!dataElement)
+                return;
             var columnWidth = 0;
             var columnHeight = 0;
             switch (type) {

@@ -16,6 +16,7 @@ export class LayoutUtil {
             },
             (type, dim, index) => {
                 let dataElement = data[index];
+                if(!dataElement) return;
                 let columnWidth = 0;
                 let columnHeight = 0;
                 switch (type) {
