@@ -103,7 +103,7 @@ export default class MasonaryLayoutManager implements LayoutManagerInterface {
       startX = colLenght * minColumnIdx;
 
       if (this._isHorizontal) {
-        
+
       } else {
         if (itemDim.width > colLenght) {
           startY = columnLenghts[maxColumnIdxFn()];
@@ -123,14 +123,14 @@ export default class MasonaryLayoutManager implements LayoutManagerInterface {
         startX = columnLenghts[minColumnIdxFn(columnLenghts)];
       } else {
         if (itemDim.width > colLenght) {
-          columnLenghts[maxColumnIdxFn()] += itemDim.height;  
+          columnLenghts[maxColumnIdxFn()] += itemDim.height;
           let currentMaxHeight = columnLenghts[maxColumnIdxFn()];
           for (let idx = 0; idx < this._columnCount; idx++) {
             if(idx != maxColumnIdxFn())
               columnLenghts[idx] = currentMaxHeight;
           }
         } else {
-          columnLenghts[minColumnIdx] += itemDim.height;  
+          columnLenghts[minColumnIdx] += itemDim.height;
         }
       }
     }
@@ -143,10 +143,10 @@ export default class MasonaryLayoutManager implements LayoutManagerInterface {
       this._totalWidth = this._window.width;
       this._totalHeight = columnLenghts[maxColumnIdxFn()];
     }
-    console.log("COLUMN LENGTH");
-    console.log(columnLenghts);
-    console.log("START");
-    console.log(startX + " "+ startY);
+    // console.log("COLUMN LENGTH");
+    // console.log(columnLenghts);
+    // console.log("START");
+    // console.log(startX + " "+ startY);
   }
 
   private _checkBounds(itemX: number, itemY: number, itemDim: Dimension, isHorizontal: boolean): boolean {

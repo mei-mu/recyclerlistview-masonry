@@ -115,10 +115,10 @@ var MasonaryLayoutManager = /** @class */ (function () {
             this._totalWidth = this._window.width;
             this._totalHeight = columnLenghts[maxColumnIdxFn()];
         }
-        console.log("COLUMN LENGTH");
-        console.log(columnLenghts);
-        console.log("START");
-        console.log(startX + " " + startY);
+        // console.log("COLUMN LENGTH");
+        // console.log(columnLenghts);
+        // console.log("START");
+        // console.log(startX + " "+ startY);
     };
     MasonaryLayoutManager.prototype._checkBounds = function (itemX, itemY, itemDim, isHorizontal) {
         return isHorizontal ? itemY + itemDim.height <= this._window.height : itemX + itemDim.width <= this._window.width;
