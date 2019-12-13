@@ -266,7 +266,6 @@ var RecyclerListView = /** @class */ (function (_super) {
         });
     };
     RecyclerListView.prototype._onSizeChanged = function (layout) {
-        layout.width = layout.width - (this.props.marginOffset || 0);
         var hasHeightChanged = this._layout.height !== layout.height;
         var hasWidthChanged = this._layout.width !== layout.width;
         this._layout.height = layout.height;

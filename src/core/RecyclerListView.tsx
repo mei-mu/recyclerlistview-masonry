@@ -416,7 +416,6 @@ export default class RecyclerListView extends React.Component<
   }
 
   private _onSizeChanged(layout: Dimension): void {
-    layout.width = layout.width - (this.props.marginOffset || 0);
     const hasHeightChanged = this._layout.height !== layout.height;
     const hasWidthChanged = this._layout.width !== layout.width;
     this._layout.height = layout.height;
